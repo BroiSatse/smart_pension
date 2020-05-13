@@ -1,3 +1,3 @@
-require 'pathname'
+require_relative '../log_parser/env'
 
-ROOT = Pathname.new(__FILE__).join('..', '..')
+require 'faker'
