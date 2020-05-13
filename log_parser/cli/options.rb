@@ -1,10 +1,14 @@
+require 'optparse'
+
 module LogParser
   module CLI
     class Options
-      attr_reader :files
+      # This class is responsible for parsing and storing comand line options
+      # without any domain-specific operations
+      attr_reader :text_files
 
       def initialize
-        @files = []
+        @text_files = []
       end
 
       def self.parse!(args)
@@ -13,8 +17,8 @@ module LogParser
         parser = OptionParser.new do |p|
           p.banner = 'Usage: parse_log [options]'
 
-          p.on('-fFILE') do |file|
-            options.files << file
+          p.on('-f FILE', 'Text file containing server log to be parsed') do |file|
+            options.text_files << file
           end
         end
 

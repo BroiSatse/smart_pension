@@ -10,5 +10,6 @@ end
 
 group :test do
   gem 'rspec', '~> 3.9'
+  gem 'simplecov', require: false
   gem 'faker'
 end

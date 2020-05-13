@@ -13,8 +13,8 @@ RSpec.describe LogParser::CLI::Options do
       let(:files) { Array.new(rand 2..4) { File.join *Faker::Lorem.words(number: 3) } }
       let(:args) { files.flat_map { |file| ['-f', file] } }
 
-      it 'defines file to be loaded' do
-        expect(subject.files).to eq files
+      it 'defines files to be loaded' do
+        expect(subject.text_files).to eq files
       end
     end
   end
