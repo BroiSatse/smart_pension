@@ -15,7 +15,7 @@ RSpec.describe LogParser::Stats::VisitCount do
       expect(subject.result).to eq(
         all_visits
           .group_by(&:first)
-          .map {|page, ary| [page, ary.count] }
+          .map { |page, ary| [page, ary.count] }
           .sort_by(&:last)
       )
     end

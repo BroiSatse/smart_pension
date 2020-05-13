@@ -2,7 +2,7 @@ module LogParser
   module Stats
     class VisitCount
       def initialize
-        @cache = Hash.new { |h,k| h[k] = 0 }
+        @cache = Hash.new { |hash, ip| hash[ip] = 0 }
       end
 
       def record(path, _ip)

@@ -22,7 +22,7 @@ RSpec.describe LogParser::CLI::Run do
     describe 'text_files option' do
       let(:text_files) { Array.new(rand 2..4) { File.join *Faker::Lorem.words(number: 3) } }
 
-      let(:fake_loaders) { Hash.new {|hash, key| hash[key] = double } }
+      let(:fake_loaders) { Hash.new { |hash, key| hash[key] = double } }
 
       before do
         allow(LogParser::Loaders::TextFileLoader).to receive(:call) do |file_path|

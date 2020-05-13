@@ -3,3 +3,15 @@ AllCops:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 100
+
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

@@ -34,7 +34,7 @@ RSpec.describe LogParser::Run do
 
   def generate_fake_stat
     double 'Fake stat generator',
-      record: nil,
-      result: Array.new(rand 2..3) { [(paths + ips).sample, rand(0..10)] }
+           record: nil,
+           result: Array.new(rand 2..3) { [(paths + ips).sample, rand(0..10)] }
   end
 end

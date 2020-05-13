@@ -3,7 +3,8 @@ module LogParser
   class Run
     # This is the main entry point of the program.
     # Options taken:
-    #    loaders:  list of data loaders. Each data loader should be enumerator yielding address and ip address of the visit
+    #    loaders:  list of data loaders. Each data loader should be enumerator yielding address and
+    #              ip address of the visit
     include Callable
 
     def initialize(loaders:, stat:)
