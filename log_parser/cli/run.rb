@@ -10,13 +10,28 @@ module LogParser
 
       def initialize(options)
         @options = options
-        puts options.inspect
       end
 
       def call
+        LogParser::Run.(**run_args)
       end
 
       private
+
+      def run_args
+        {
+          loaders: [
+            *text_file_loaders
+          ]
+        }
+      end
+
+      def text_file_loaders
+        return [] unless options.text_files.any?
+
+        require 'log_parser/loaders/text_file_loader'
+        options.text_files.map { |file_path| LogParser::Loaders::TextFileLoader.(file_path) }
+      end
 
       attr_reader :options
     end
