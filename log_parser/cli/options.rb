@@ -16,7 +16,7 @@ module LogParser
       end
 
       def self.parse!(args)
-        options = self.new
+        options = new
 
         parser = OptionParser.new do |p|
           p.banner = 'Usage: parse_log [options]'

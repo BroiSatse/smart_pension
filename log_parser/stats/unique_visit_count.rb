@@ -3,7 +3,6 @@ require 'set'
 module LogParser
   module Stats
     class UniqueVisitCount
-
       def initialize
         @cache = Hash.new { |hash, path| hash[path] = CacheEntry.new }
       end

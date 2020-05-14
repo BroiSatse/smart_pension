@@ -3,7 +3,7 @@ require 'pathname'
 Example = Struct.new(:name, :command, :expected_output) do
   def self.from_file(file_path)
     command, *expected_output = File.read(file_path).lines
-    new(file_path.basename, command, expected_output.join($\))
+    new(file_path.basename, command.chomp, expected_output.join)
   end
 end
 
@@ -18,7 +18,7 @@ RSpec.describe 'Examples', feature: true do
       let(:expected_output) { example.expected_output }
 
       it "`#{example.command}` generates expected output'" do
-        expect(`#{command}`).to eq(expected_output), "Incorrect output"
+        expect(`#{command}`).to eq(expected_output), 'Incorrect output'
       end
     end
   end

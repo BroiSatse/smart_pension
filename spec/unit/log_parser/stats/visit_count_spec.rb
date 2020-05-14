@@ -16,7 +16,7 @@ RSpec.describe LogParser::Stats::VisitCount do
         all_visits
           .group_by(&:first)
           .map { |page, ary| [page, ary.count] }
-          .sort_by{ |_page, count| -count }
+          .sort_by { |_page, count| -count }
       )
     end
   end

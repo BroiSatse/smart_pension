@@ -11,13 +11,21 @@ module LogParser
       include Callable
 
       PresenterRegistry = Helpers::LazyRegistry.new.tap do |r|
-        r.register :simple, 'LogParser::CLI::Presenters::Simple', 'log_parser/cli/presenters/simple'
-        r.register :pretty, 'LogParser::CLI::Presenters::Pretty', 'log_parser/cli/presenters/pretty'
+        r.register :simple,
+          'LogParser::CLI::Presenters::Simple',
+          'log_parser/cli/presenters/simple'
+        r.register :pretty,
+          'LogParser::CLI::Presenters::Pretty',
+          'log_parser/cli/presenters/pretty'
       end
 
       StatRegistry = Helpers::LazyRegistry.new.tap do |r|
-        r.register :unique_visits, 'LogParser::Stats::UniqueVisitCount', 'log_parser/stats/unique_visit_count'
-        r.register :visits, 'LogParser::Stats::VisitCount', 'log_parser/stats/visit_count'
+        r.register :unique_visits,
+          'LogParser::Stats::UniqueVisitCount',
+          'log_parser/stats/unique_visit_count'
+        r.register :visits,
+          'LogParser::Stats::VisitCount',
+          'log_parser/stats/visit_count'
       end
 
       def initialize(options, out: STDOUT, err: STDERR)

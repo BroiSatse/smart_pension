@@ -11,9 +11,9 @@ RSpec.describe LogParser::CLI::Run do
 
   let(:options) do
     instance_double LogParser::CLI::Options,
-      text_files: text_files,
-      unique: unique,
-      pretty: pretty
+                    text_files: text_files,
+                    unique: unique,
+                    pretty: pretty
   end
 
   before do
@@ -35,7 +35,7 @@ RSpec.describe LogParser::CLI::Run do
     end
 
     describe 'text_files option conversion' do
-      let(:text_files) { Array.new(rand 2..4) { File.join *Faker::Lorem.words(number: 3) } }
+      let(:text_files) { Array.new(rand 2..4) { File.join(*Faker::Lorem.words(number: 3)) } }
 
       let(:fake_loaders) { Hash.new { |hash, key| hash[key] = double } }
 

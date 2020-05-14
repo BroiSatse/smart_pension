@@ -12,7 +12,8 @@ module LogParser
       end
 
       def get(key)
-        return unless entry = registry[key.to_sym]
+        return unless (entry = registry[key.to_sym])
+
         require entry.file_path
         entry.const_name.split('::').inject(Object) { |mod, part| mod.const_get(part) }
       end

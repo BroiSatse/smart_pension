@@ -15,3 +15,17 @@ Style/NestedParenthesizedCalls:
 
 Style/Documentation:
   Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - describe
+    - context

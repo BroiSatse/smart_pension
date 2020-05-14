@@ -11,7 +11,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'faker'
   gem 'rspec', '~> 3.9'
   gem 'simplecov', require: false
-  gem 'faker'
 end

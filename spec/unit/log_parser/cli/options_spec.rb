@@ -10,7 +10,7 @@ RSpec.describe LogParser::CLI::Options do
     end
 
     describe '-f' do
-      let(:files) { Array.new(rand 2..4) { File.join *Faker::Lorem.words(number: 3) } }
+      let(:files) { Array.new(rand 2..4) { File.join(*Faker::Lorem.words(number: 3)) } }
       let(:args) { files.flat_map { |file| ['-f', file] } }
 
       it 'defines files to be loaded' do
@@ -26,7 +26,7 @@ RSpec.describe LogParser::CLI::Options do
       end
 
       context 'with the --unique option' do
-        let(:args) { %w[--unique]}
+        let(:args) { %w[--unique] }
 
         it 'sets unique flag to true' do
           expect(result.unique).to be true
@@ -42,7 +42,7 @@ RSpec.describe LogParser::CLI::Options do
       end
 
       context 'with the --pretty option' do
-        let(:args) { %w[--pretty]}
+        let(:args) { %w[--pretty] }
 
         it 'sets unique flag to true' do
           expect(result.pretty).to be true
