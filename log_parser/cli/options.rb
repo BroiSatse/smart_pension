@@ -6,9 +6,11 @@ module LogParser
       # This class is responsible for parsing and storing comand line options
       # without any domain-specific operations
       attr_reader :text_files
+      attr_accessor :unique
 
       def initialize
         @text_files = []
+        @unique = false
       end
 
       def self.parse!(args)
@@ -19,6 +21,10 @@ module LogParser
 
           p.on('-f FILE', 'Text file containing server log to be parsed') do |file|
             options.text_files << file
+          end
+
+          p.on('--unique', 'Displays statistics for unique vists') do
+            options.unique = true
           end
         end
 

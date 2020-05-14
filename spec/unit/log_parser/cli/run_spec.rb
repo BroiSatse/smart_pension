@@ -3,13 +3,15 @@ require 'spec/unit/shared/callable'
 
 RSpec.describe LogParser::CLI::Run do
   let(:text_files) { [] }
+  let(:unique) { false }
   let(:fake_data) { double 'data' }
   let(:presenter) { double 'presenter', call: Faker::Lorem.paragraph }
   let(:output) { StringIO.new }
 
   let(:options) do
     instance_double LogParser::CLI::Options,
-      text_files: text_files
+      text_files: text_files,
+      unique: unique
   end
 
   before do
@@ -45,6 +47,30 @@ RSpec.describe LogParser::CLI::Run do
         subject.call
         expect(LogParser::Run).to have_received(:call) do |loaders:, **|
           expect(loaders).to match_array fake_loaders.values
+        end
+      end
+    end
+
+    describe 'handling unique option' do
+      context 'when flag is set to false' do
+        let(:unique) { false }
+
+        it 'injects VisitCount stat generator' do
+          subject.call
+          expect(LogParser::Run).to have_received(:call) do |stat:, **|
+            expect(stat).to be_instance_of LogParser::Stats::VisitCount
+          end
+        end
+      end
+
+      context 'when flag is set to true' do
+        let(:unique) { true }
+
+        it 'injects UniqueVisitCount stat generator' do
+          subject.call
+          expect(LogParser::Run).to have_received(:call) do |stat:, **|
+            expect(stat).to be_instance_of LogParser::Stats::UniqueVisitCount
+          end
         end
       end
     end

@@ -1,0 +1,4 @@
+./parse_log -f spec/fixtures/short_log.log --unique
+/home	3
+/about	2
+/	1
