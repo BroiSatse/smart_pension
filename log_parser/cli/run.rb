@@ -1,4 +1,6 @@
 require 'log_parser/helpers/callable'
+require 'log_parser/helpers/lazy_registry'
+require 'log_parser/stats/visit_count'
 require 'log_parser/run'
 
 module LogParser
@@ -8,21 +10,30 @@ module LogParser
 
       include Callable
 
-      def initialize(options)
+      PresenterRegistry = Helpers::LazyRegistry.new.tap do |r|
+        r.register 'simple', 'LogParser::CLI::Presenters::Simple', 'log_parser/cli/presenters/simple'
+      end
+
+      def initialize(options, out: STDOUT)
         @options = options
+        @out = out
       end
 
       def call
-        LogParser::Run.(**run_args)
+        result = LogParser::Run.(**run_args)
+        out << presenter.(result)
+        out << "\n\n"
       end
 
       private
 
+      attr_reader :options, :out
+
+
       def run_args
         {
-          loaders: [
-            *text_file_loaders
-          ]
+          loaders: text_file_loaders,
+          stat: LogParser::Stats::VisitCount.new
         }
       end
 
@@ -33,7 +44,9 @@ module LogParser
         options.text_files.map { |file_path| LogParser::Loaders::TextFileLoader.(file_path) }
       end
 
-      attr_reader :options
+      def presenter
+        PresenterRegistry.get('simple')
+      end
     end
   end
 end
