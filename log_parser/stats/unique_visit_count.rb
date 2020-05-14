@@ -1,3 +1,5 @@
+require 'set'
+
 module LogParser
   module Stats
     class UniqueVisitCount

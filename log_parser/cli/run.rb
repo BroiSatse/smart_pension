@@ -1,6 +1,7 @@
 require 'log_parser/helpers/callable'
 require 'log_parser/helpers/lazy_registry'
 require 'log_parser/run'
+require 'log_parser/error'
 
 module LogParser
   module CLI
@@ -19,20 +20,25 @@ module LogParser
         r.register :visits, 'LogParser::Stats::VisitCount', 'log_parser/stats/visit_count'
       end
 
-      def initialize(options, out: STDOUT)
+      def initialize(options, out: STDOUT, err: STDERR)
         @options = options
         @out = out
+        @err = err
       end
 
       def call
         result = LogParser::Run.(**run_args)
         out << presenter.(result)
         out << "\n"
+      rescue LogParser::Error => e
+        err << e.message
+        err << "\n"
+        exit(1)
       end
 
       private
 
-      attr_reader :options, :out
+      attr_reader :options, :out, :err
 
       def run_args
         {

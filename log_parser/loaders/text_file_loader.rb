@@ -1,4 +1,5 @@
 require 'log_parser/helpers/callable'
+require 'log_parser/loaders/error'
 
 module LogParser
   module Loaders
@@ -11,7 +12,12 @@ module LogParser
 
       def call
         Enumerator.new do |y|
-          file = File.open(file_path, 'r')
+          begin
+            file = File.open(file_path, 'r')
+          rescue Errno::ENOENT
+            raise Error, "Failed to open file `#{file_path}`"
+          end
+
           file.each
             .map { |line| line.chop.split(' ') }
             .each { |address, ip| y << [address, ip] }
