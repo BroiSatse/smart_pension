@@ -7,10 +7,12 @@ module LogParser
       # without any domain-specific operations
       attr_reader :text_files
       attr_accessor :unique
+      attr_accessor :pretty
 
       def initialize
         @text_files = []
         @unique = false
+        @pretty = false
       end
 
       def self.parse!(args)
@@ -25,6 +27,10 @@ module LogParser
 
           p.on('--unique', 'Displays statistics for unique vists') do
             options.unique = true
+          end
+
+          p.on('--pretty', 'Formats data in more human-friendly manner') do
+            options.pretty = true
           end
         end
 

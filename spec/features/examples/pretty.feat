@@ -1,0 +1,6 @@
+./parse_log -f spec/fixtures/short_log.log --pretty
++--------+---+
+| /home  | 4 |
+| /about | 2 |
+| /      | 1 |
++--------+---+

@@ -4,6 +4,7 @@ require 'spec/unit/shared/callable'
 RSpec.describe LogParser::CLI::Run do
   let(:text_files) { [] }
   let(:unique) { false }
+  let(:pretty) { false }
   let(:fake_data) { double 'data' }
   let(:presenter) { double 'presenter', call: Faker::Lorem.paragraph }
   let(:output) { StringIO.new }
@@ -11,7 +12,8 @@ RSpec.describe LogParser::CLI::Run do
   let(:options) do
     instance_double LogParser::CLI::Options,
       text_files: text_files,
-      unique: unique
+      unique: unique,
+      pretty: pretty
   end
 
   before do
@@ -75,10 +77,26 @@ RSpec.describe LogParser::CLI::Run do
       end
     end
 
-    it 'displays data using correct presenter' do
-      subject.call
+    describe 'presenter' do
+      context 'without pretty flag' do
+        let(:pretty) { false }
 
-      expect(described_class::PresenterRegistry).to have_received(:get).with('simple')
+        it 'displays data using simple presenter' do
+          subject.call
+
+          expect(described_class::PresenterRegistry).to have_received(:get).with(:simple)
+        end
+      end
+
+      context 'within pretty flag' do
+        let(:pretty) { true }
+
+        it 'displays data using simple presenter' do
+          subject.call
+
+          expect(described_class::PresenterRegistry).to have_received(:get).with(:pretty)
+        end
+      end
     end
   end
 end

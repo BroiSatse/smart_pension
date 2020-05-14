@@ -33,5 +33,21 @@ RSpec.describe LogParser::CLI::Options do
         end
       end
     end
+
+    describe '--pretty' do
+      context 'without the --pretty option' do
+        it 'sets unique flag to false' do
+          expect(result.pretty).to be false
+        end
+      end
+
+      context 'with the --pretty option' do
+        let(:args) { %w[--pretty]}
+
+        it 'sets unique flag to true' do
+          expect(result.pretty).to be true
+        end
+      end
+    end
   end
 end

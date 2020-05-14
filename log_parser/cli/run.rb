@@ -11,6 +11,7 @@ module LogParser
 
       PresenterRegistry = Helpers::LazyRegistry.new.tap do |r|
         r.register :simple, 'LogParser::CLI::Presenters::Simple', 'log_parser/cli/presenters/simple'
+        r.register :pretty, 'LogParser::CLI::Presenters::Pretty', 'log_parser/cli/presenters/pretty'
       end
 
       StatRegistry = Helpers::LazyRegistry.new.tap do |r|
@@ -53,7 +54,7 @@ module LogParser
       end
 
       def presenter
-        PresenterRegistry.get('simple')
+        PresenterRegistry.get(options.pretty ? :pretty : :simple)
       end
     end
   end
