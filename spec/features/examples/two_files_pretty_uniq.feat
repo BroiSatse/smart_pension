@@ -1,0 +1,10 @@
+./parse_log -f spec/fixtures/short_log.log -f spec/fixtures/webserver.log --pretty --unique
++--------------+----+
+| /home        | 26 |
+| /about       | 23 |
+| /help_page/1 | 23 |
+| /contact     | 23 |
+| /index       | 23 |
+| /about/2     | 22 |
+| /            | 1  |
++--------------+----+
