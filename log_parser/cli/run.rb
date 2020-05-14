@@ -22,7 +22,7 @@ module LogParser
       def call
         result = LogParser::Run.(**run_args)
         out << presenter.(result)
-        out << "\n\n"
+        out << "\n"
       end
 
       private

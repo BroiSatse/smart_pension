@@ -1,7 +1,7 @@
 require 'log_parser/helpers/lazy_registry'
 
 # We are using `fork` in tests below to isolate process memory.This is to ensure that each test
-# starts without constants being already loaded.
+# starts without constants being already loaded. Unfortunately, this affects code coverage.
 RSpec.describe LogParser::Helpers::LazyRegistry do
   before do
     subject.register :a, 'RegistrySpecFixture::A', 'spec/unit/log_parser/helpers/registry/a'

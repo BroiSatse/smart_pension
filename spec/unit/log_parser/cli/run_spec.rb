@@ -54,6 +54,5 @@ RSpec.describe LogParser::CLI::Run do
 
       expect(described_class::PresenterRegistry).to have_received(:get).with('simple')
     end
-
   end
 end

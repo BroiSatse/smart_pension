@@ -10,7 +10,7 @@ module LogParser
       end
 
       def result
-        cache.to_a.sort_by(&:last)
+        cache.to_a.sort_by { |_, count| -count }
       end
 
       private
